@@ -1,0 +1,183 @@
+body {
+  background: white url("images/background.jpg") ;
+  background-size: cover;
+}
+
+.smartphone{
+    background: url("images/smartphone_app.png") ;
+    left:50px;
+    width: 400px;
+    height: 800px;
+    background-size: cover;
+    position: fixed;
+    /* background-size: cover; */
+}
+
+.memo_system{
+
+  width: 350px;
+  height: 140px;
+  left:30px;
+  position:relative;	
+
+}
+
+.add{
+  width:30px;
+  height: 30px;
+  margin: 10px;
+  left: 100px;
+  top: 10px;
+  position:relative;	
+}
+.memo_list{
+
+  width: 350px;
+  height: 550px;
+  /* position: fixed; */
+  left:30px;
+  /* position:relative; */
+  /* overflow: scroll; */
+}
+
+.box1 {
+  background: #ecf1f3;
+  width: 330px;
+  height: 60px;
+  margin: 5px;
+  top:0px;
+  position:relative;	
+  border-radius: 20px;
+
+}  
+
+.category{
+    width: 100px;
+    height: 10px;
+    left: 10px;
+    position:absolute;
+}
+
+.title{/* 頻度より色を変化したら面白い */
+  width: 300px;
+  height: 30px;
+  position:absolute;
+  top: 20px;
+  left:20px;
+}
+
+.url{
+  width: 350px;
+  height: 40px;
+  position:absolute;
+  bottom: 10px;
+  left:200px;
+}
+
+.fold{
+    position: absolute;
+    right:10px;
+    bottom:5px;
+}
+.edit{
+    left:800px;
+    position:absolute;
+}
+
+.memo_paper{
+  width: 400px;
+  height: 600px;
+  margin: 50px;
+  position: fixed;
+  right: 20px;
+  top: 50px;	
+  overflow: scroll;
+}
+
+
+p {
+white-space: pre-wrap;
+}
+
+
+
+
+.delete{
+  background: red;
+  width: 40px;
+  height: 40px;
+  position:absolute;
+  bottom: 25px;
+  left:100%;
+}
+
+
+
+
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .inner {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 10px;
+  display: block;
+  width: 960px;
+  height: 1200px;
+  border-radius: 5px;
+  /* -webkit-backdrop-filter: blur(16px); */
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  max-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #333;
+  font-size: 1.5rem;
+  animation: fadeInAnimation 200ms ease-out;
+}
+
+
+.close__btn {
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  width: 40px;
+}
+.close__btn:hover {
+  opacity: .8;
+}
+
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+

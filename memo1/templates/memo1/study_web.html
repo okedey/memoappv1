@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>本の記録フォームの作成</title>
+<link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" href="{% static 'memo1/style.css' %}">
+{% comment %} <script src="{% static 'memo1/test.js' %}"></script> {% endcomment %}
+</head>
+<body class="container">
+<div class="smartphone">
+  <div class="memo_system">
+    <h1 class="add"><i class="fas fa-solid fa-plus"></i></h1>
+  </div> 
+  <div class="memo_list">
+  {% for item in data %}
+    <div class="box1 child">
+      <button class="title content" onclick='display_detail("{{item.title}}","{{item.category}}","{{item.url}}",{{item.id}})'>{{item.title}}</button>
+      <a class="category content">{{item.category}}</a>
+      <a id="{{item.id}}" hidden>{{item.content}}</a>
+      <button class="editor" onclick='display_editor("{{item.title}}","{{item.category}}","{{item.url}}",{{item.id}})'>▼</button>
+      <form action="{% url 'web_delete' %}" method="post">{% csrf_token %}
+        <button onclick="return confirm('削除しますか?')" class="delete" type='submit' name='num' value="{{item.id}}"><i class="fas fa-solid fa-trash"></i></button>
+      </form>
+    </div>
+{% endfor %}
+  </div>
+</div>
+<p><i class="fab fa-twitter"></i></p>
+
+
+<script>
+document.querySelector('.add').addEventListener('click',display_add);
+const modalElement2 = document.createElement('div');
+
+function display_add() {
+  // モーダルウインドウを生成する
+  const modalElement1 = document.createElement('div');
+  // modalクラスを付与する
+  modalElement1.classList.add('modal');
+
+  // モーダルウインドウの内部要素を生成する
+  const innerElement1 = document.createElement('div');
+  innerElement1.classList.add('inner');
+  innerElement1.innerHTML = `
+  <div id="form">
+  <form action="{% url 'web_create' %}" method="post">{% csrf_token %}
+	<p>タイトル：<br>
+	<input type="text" name="title"></p>
+	<p>関連言語：<br>
+	<input type="text" name="category"></p>
+  <p>ソースコードや使用例：<br>
+  <textarea name="content" cols="60" rows="12" wrap="hard"></textarea></p>
+  <p>URL:<br>
+  <input type="text" name="url"></p>
+  <p><input type="submit" value="確認する"></p>
+  </form>
+  <div id="close_btn">close</div>
+  </div>
+  `;
+  // モーダルウインドウに内部要素を配置する
+  modalElement1.appendChild(innerElement1);
+  // body要素にモーダルウインドウを配置する
+  document.body.appendChild(modalElement1);
+
+  const close = document.getElementById('close_btn');
+
+  // 内部要素をクリックしたらモーダルウインドウを削除する処理
+  close.addEventListener('click', () => {
+    closeModalWindow(modalElement1);
+  });
+}    
+/* メモのキープリスト */
+function display_detail(title,category,url,num) {
+  // モーダルウインドウを生成する
+  //外側に出せば余計なflexは必要ない？
+  var content=document.getElementById(num);
+
+  // モーダルウインドウの内部要素を生成する
+  const innerElement2 = document.createElement('div');
+  const innerElement2_title = document.createElement('p');
+  const innerElement2_category = document.createElement('p');
+  const innerElement2_content = document.createElement('p');
+  
+  innerElement2_title.innerHTML =title;
+  innerElement2_category.innerHTML =category;
+  innerElement2_content.innerHTML =content;
+
+  innerElement2.appendChild(innerElement2_title);
+ innerElement2.appendChild(innerElement2_category);
+ innerElement2.appendChild(innerElement2_content);
+
+ //innerElement2.children[3].href = url;
+ modalElement2.classList.add('memo_paper');
+ innerElement2_title.classList.add('child');
+  // モーダルウインドウに内部要素を配置する
+  modalElement2.appendChild(innerElement2);
+  // body要素にモーダルウインドウを配置する
+  document.body.appendChild(modalElement2);
+
+}
+/* メモの編集 */
+function display_editor(title,category,url,id) {
+    // モーダルウインドウを生成する
+    // モーダルウインドウの内部要素を生成する
+    const innerElement_editor = document.createElement('div');
+    innerElement_editor.innerHTML = '<a class="url content" target="_blank">該当ページへ</a>';
+    innerElement_editor.children[0].href = url;
+    // body要素にモーダルウインドウを配置する
+    document.body.appendChild(innerElement_editor);
+} 
+/*要素を消す */
+function closeModalWindow(modalElement) {
+  document.body.removeChild(modalElement);
+}
+
+</script>
+</body>
+</html>

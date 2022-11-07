@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>本の記録フォームの作成</title>
+<link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+<style type="text/css">
+</style>
+</head>
+<body class="container">
+<div class="box1"><p class="title content">{{data.title}}</p>
+<p class="category content">{{data.category}}</p>
+<p class="url content" href="{{data.url}}">該当ページへ</p>
+<p class="edit">編集する</p>
+
+</div>
+<script>
+document.querySelector('.edit').addEventListener('click',displayModalWindow1);
+
+/** モーダルウインドウを表示する */
+function displayModalWindow1() {
+  // モーダルウインドウを生成する
+  const modalElement1 = document.createElement('div');
+  // modalクラスを付与する
+  modalElement1.classList.add('modal');
+
+  // モーダルウインドウの内部要素を生成する
+  const innerElement1 = document.createElement('div');
+  innerElement1.classList.add('inner');
+  innerElement1.innerHTML = `
+  <div id="form">
+  <form action="{% url 'web_edit' data.id  %}" method="post">{% csrf_token %}
+	<p>タイトル：<br>
+	<input type="text" name="title" value="{{data.title}}"></p>
+	<p>関連言語：<br>
+	<input type="text" name="category" value="{{data.category}}"></p>
+    <p>ソースコードや使用例：<br>
+    <label for="content"></label>   
+    <textarea name="content" cols="60" rows="12">{{data.content}}</textarea></p>
+    <p>URL:<br>
+    <input type="text" name="url" value="{{data.url}}"></p>
+    <p><input type="submit" value="確認する"></p>
+</form>
+<div id="close_btn">close</div>
+</div>
+  `;
+  // モーダルウインドウに内部要素を配置する
+  modalElement1.appendChild(innerElement1);
+  // body要素にモーダルウインドウを配置する
+  document.body.appendChild(modalElement1);
+
+  const close = document.getElementById('close_btn');
+
+  // 内部要素をクリックしたらモーダルウインドウを削除する処理
+  close.addEventListener('click', () => {
+    closeModalWindow(modalElement1);
+  });
+}
+
+/** モーダルウインドウを閉じる */
+function closeModalWindow(modalElement) {
+    document.body.removeChild(modalElement);
+  }
+  
+</script>
+</body>
+</html>

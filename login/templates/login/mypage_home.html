@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>CSSを読み込む方法</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'login/style.css' %}">
+</head>
+<body>
+<div class="top_bar">
+    <a href="{% url 'mypage_home' %}">profile</a>
+    <a href="{% url 'web_home' %}">production</a> 
+    <a href="{% url 'mypage_home' %}">SNS</a> 
+    <a href="{% url 'mypage_home' %}">useful-tool</a>  
+</div>
+<p class="title">kouokのホームページ</p>    
+<script>
+</script>
+</body>
+</html>
