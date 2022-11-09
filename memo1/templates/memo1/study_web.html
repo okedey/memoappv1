@@ -12,6 +12,11 @@
 <div class="smartphone">
   <div class="memo_system">
     <h1 class="add"><i class="fas fa-solid fa-plus"></i></h1>
+    <form action="{% url 'web_home' %}" method="post">{% csrf_token %}
+      検索キーワード入力
+      <input type="text" name="keywords" />
+      <button type="submit" name="submit">検索</button>
+    </form>
   </div> 
   <div class="memo_list">
   {% for item in data %}

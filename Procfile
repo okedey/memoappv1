@@ -1,0 +1,1 @@
+web: gunicorn original_memo.wsgi
